@@ -1,0 +1,16 @@
+# Secretos / entorno local
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Django
+db.sqlite3
+staticfiles/
+media/
+gift_finder_errors.log
+
+# Node
+node_modules/
