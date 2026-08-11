@@ -32,17 +32,31 @@ ERROR_LOG_PATH = Path(__file__).resolve().parent.parent / "gift_finder_errors.lo
 
 def _log_error(context):
     """
-    Deja registro del error real en un archivo (UTF-8), en vez de
-    print()/logging a consola — en Windows eso puede reventar con
-    UnicodeEncodeError si el contenido tiene emoji (ya nos pasó una vez
-    con el carrito). Nunca debe poder tirar una excepción hacia afuera.
+    Deja registro del error real en un archivo local (útil en dev) Y en
+    stdout (lo único visible en los "Logs" de Render — ahí no hay acceso
+    a la terminal para leer el archivo). El print va en su propio
+    try/except: en la consola de Windows en cp1252 un traceback con
+    emoji puede reventar con UnicodeEncodeError (ya nos pasó una vez con
+    el carrito), así que si falla cae a una versión solo-ASCII.
     """
+
+    tb = traceback.format_exc()
 
     try:
         with open(ERROR_LOG_PATH, "a", encoding="utf-8") as f:
             f.write(f"\n--- {context} ---\n")
-            f.write(traceback.format_exc())
+            f.write(tb)
             f.write("\n")
+    except Exception:
+        pass
+
+    try:
+        print(f"\n--- GIFT FINDER ERROR: {context} ---\n{tb}")
+    except UnicodeEncodeError:
+        try:
+            print(f"\n--- GIFT FINDER ERROR: {context} ---\n{tb}".encode("ascii", "replace").decode("ascii"))
+        except Exception:
+            pass
     except Exception:
         pass
 

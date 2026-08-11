@@ -119,7 +119,7 @@ function injectGiftFinderMarkup() {
                         maxlength="300"
                         autocomplete="off"
                         placeholder="Escribile a Regi..."
-                        class="flex-1 rounded-full border border-[#F3B8C8] bg-[#FCE4EC] px-5 py-3 text-sm outline-none transition focus:border-[#C60018]">
+                        class="flex-1 rounded-full border border-[#F3B8C8] bg-[#FCE4EC] px-5 py-3 text-base outline-none transition focus:border-[#C60018]" style="font-size:16px;">
 
                     <button
                         id="giftFinderSend"
