@@ -20,6 +20,7 @@ class Category(models.Model):
 
     image = models.ImageField(
         upload_to="categories/",
+        max_length=255,
         blank=True,
         null=True
     )
@@ -109,6 +110,7 @@ class GiftItem(models.Model):
 
     image = models.ImageField(
         upload_to="gift-items/",
+        max_length=255,
         blank=True,
         null=True
     )
@@ -170,7 +172,8 @@ class GiftBox(models.Model):
     description = models.TextField()
 
     image = models.ImageField(
-        upload_to="gift-boxes/"
+        upload_to="gift-boxes/",
+        max_length=255
     )
 
     price = models.DecimalField(
@@ -268,7 +271,8 @@ class GiftBoxImage(models.Model):
     )
 
     image = models.ImageField(
-        upload_to="gift-boxes/gallery/"
+        upload_to="gift-boxes/gallery/",
+        max_length=255
     )
 
     order = models.PositiveIntegerField(
