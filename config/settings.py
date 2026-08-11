@@ -214,6 +214,11 @@ STORAGES = {
     },
 }
 
+# Compat: django-cloudinary-storage 0.3.0 todavía lee STATICFILES_STORAGE/
+# DEFAULT_FILE_STORAGE directamente en vez del STORAGES nuevo de Django.
+STATICFILES_STORAGE = STORAGES['staticfiles']['BACKEND']
+DEFAULT_FILE_STORAGE = STORAGES['default']['BACKEND']
+
 
 # ==========================================================
 # REGALBOXX
