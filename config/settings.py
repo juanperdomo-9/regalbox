@@ -202,15 +202,11 @@ STORAGES = {
         ),
     },
     'staticfiles': {
-        # El storage con manifest (hash en el nombre de archivo + cache
-        # largo) necesita que se haya corrido "collectstatic" antes — eso
-        # pasa en el deploy de producción, no en local. En DEBUG usamos el
-        # storage simple de Django para no romper "runserver".
-        'BACKEND': (
-            'django.contrib.staticfiles.storage.StaticFilesStorage'
-            if DEBUG
-            else 'whitenoise.storage.CompressedStaticFilesStorage'
-        ),
+        # Storage simple (sin pre-comprimir en collectstatic — eso rompía
+        # con archivos internos del admin de Django/select2). El
+        # middleware de whitenoise igual comprime al servir cada request,
+        # solo que al vuelo en vez de precalculado.
+        'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
     },
 }
 
@@ -218,11 +214,6 @@ STORAGES = {
 # DEFAULT_FILE_STORAGE directamente en vez del STORAGES nuevo de Django.
 STATICFILES_STORAGE = STORAGES['staticfiles']['BACKEND']
 DEFAULT_FILE_STORAGE = STORAGES['default']['BACKEND']
-
-# Algunos archivos CSS del admin de Django referencian íconos que no
-# siempre vienen incluidos (ej: admin/img/icon-debug.svg) — sin esto,
-# whitenoise corta todo el collectstatic por un archivo que ni se usa.
-WHITENOISE_MANIFEST_STRICT = False
 
 
 # ==========================================================
