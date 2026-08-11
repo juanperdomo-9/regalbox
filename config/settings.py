@@ -219,6 +219,11 @@ STORAGES = {
 STATICFILES_STORAGE = STORAGES['staticfiles']['BACKEND']
 DEFAULT_FILE_STORAGE = STORAGES['default']['BACKEND']
 
+# Algunos archivos CSS del admin de Django referencian íconos que no
+# siempre vienen incluidos (ej: admin/img/icon-debug.svg) — sin esto,
+# whitenoise corta todo el collectstatic por un archivo que ni se usa.
+WHITENOISE_MANIFEST_STRICT = False
+
 
 # ==========================================================
 # REGALBOXX
