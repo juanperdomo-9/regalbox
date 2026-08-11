@@ -405,6 +405,84 @@
 
         }
 
+        /* ===========================
+        GATEWAY PANEL — Premium Gift Boxes
+        =========================== */
+
+        .gateway-panel{
+            position:relative;
+            border-radius:40px;
+            overflow:hidden;
+            background:linear-gradient(160deg,#FFFDFE 0%,#FCE4EC 100%);
+            border:1px solid #F3B8C8;
+            box-shadow:0 30px 90px rgba(198,0,24,.12);
+        }
+
+        .gateway-grid{
+            position:absolute;
+            inset:-20px;
+            opacity:.12;
+            background-image:
+                linear-gradient(#C60018 1px,transparent 1px),
+                linear-gradient(90deg,#C60018 1px,transparent 1px);
+            background-size:34px 34px;
+            animation:gateway-drift 14s ease-in-out infinite;
+            pointer-events:none;
+        }
+
+        @keyframes gateway-drift{
+            0%,100%{ transform:translate(0,0); }
+            50%{ transform:translate(10px,-10px); }
+        }
+
+        .gateway-spotlight{
+            position:absolute;
+            inset:0;
+            background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(198,0,24,.12),transparent 60%);
+            opacity:0;
+            transition:opacity .4s;
+            pointer-events:none;
+        }
+
+        .gateway-panel:hover .gateway-spotlight{
+            opacity:1;
+        }
+
+        .gateway-scan{
+            position:absolute;
+            inset-inline:0;
+            height:140px;
+            background:linear-gradient(to bottom,transparent,rgba(198,0,24,.08),transparent);
+            animation:gateway-scan 6s ease-in-out infinite;
+            pointer-events:none;
+        }
+
+        @keyframes gateway-scan{
+            0%{ transform:translateY(-140px); }
+            100%{ transform:translateY(620px); }
+        }
+
+        .gateway-corner{
+            position:absolute;
+            width:26px;
+            height:26px;
+            border-color:rgba(198,0,24,.35);
+            transition:border-color .3s;
+        }
+
+        .gateway-panel:hover .gateway-corner{
+            border-color:#C60018;
+        }
+
+        .gateway-float{
+            animation:gateway-float 6s ease-in-out infinite;
+        }
+
+        @keyframes gateway-float{
+            0%,100%{ transform:translateY(0); }
+            50%{ transform:translateY(-14px); }
+        }
+
     </style>
 
 </head>
@@ -774,6 +852,68 @@
                         </p>
 
                     </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================================= -->
+            <!-- GATEWAY PANEL -->
+            <!-- ================================= -->
+
+            <div class="hidden lg:block">
+
+                <div
+                    id="gatewayPanel"
+                    class="gateway-panel relative flex h-[620px] w-full flex-col items-center justify-center overflow-hidden px-10 text-center">
+
+                    <div class="gateway-grid"></div>
+                    <div class="gateway-spotlight" id="gatewaySpotlight"></div>
+                    <div class="gateway-scan"></div>
+
+                    <span class="gateway-corner absolute left-7 top-7 rounded-tl-xl border-l-2 border-t-2"></span>
+                    <span class="gateway-corner absolute right-7 top-7 rounded-tr-xl border-r-2 border-t-2"></span>
+                    <span class="gateway-corner absolute bottom-7 left-7 rounded-bl-xl border-b-2 border-l-2"></span>
+                    <span class="gateway-corner absolute bottom-7 right-7 rounded-br-xl border-b-2 border-r-2"></span>
+
+                    <span class="relative text-[11px] font-semibold uppercase tracking-[.45em] text-[#9E3949]">
+                        Premium Gift Boxes
+                    </span>
+
+                    {% with box=featured_boxes.0|default:latest_boxes.0 %}
+
+                    {% if box.image %}
+
+                    <img
+                        src="{{ box.image.url }}"
+                        alt="{{ box.name }}"
+                        class="gateway-float relative mt-8 h-64 w-64 rounded-[32px] object-cover shadow-[0_30px_70px_rgba(198,0,24,.18)]">
+
+                    {% else %}
+
+                    <div class="gateway-float relative mt-8 flex h-64 w-64 items-center justify-center rounded-[32px] bg-white text-6xl shadow-[0_30px_70px_rgba(198,0,24,.18)]">
+                        🎁
+                    </div>
+
+                    {% endif %}
+
+                    {% endwith %}
+
+                    <h3 class="relative mt-8 font-display text-4xl leading-none text-[#C60018]">
+                        Cada Box, una experiencia.
+                    </h3>
+
+                    <a
+                        href="#destacados"
+                        class="magnetic relative mt-8 inline-flex items-center gap-2 rounded-full border border-[#C60018] px-6 py-3 text-[11px] font-semibold uppercase tracking-[.35em] text-[#C60018] transition-all duration-300 hover:bg-[#C60018] hover:text-white">
+
+                        Descubrir
+
+                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="square"/>
+                        </svg>
+
+                    </a>
 
                 </div>
 

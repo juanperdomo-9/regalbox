@@ -13,7 +13,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initHome() {
 
-    console.log("Home cargada");
+    initGatewaySpotlight();
+
+}
+
+
+// ===========================================
+// GATEWAY PANEL — spotlight que sigue el mouse
+// ===========================================
+
+function initGatewaySpotlight() {
+
+    const panel = document.getElementById("gatewayPanel");
+    const spotlight = document.getElementById("gatewaySpotlight");
+
+    if (!panel || !spotlight) return;
+
+    panel.addEventListener("mousemove", (e) => {
+
+        const rect = panel.getBoundingClientRect();
+
+        spotlight.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+        spotlight.style.setProperty("--my", `${e.clientY - rect.top}px`);
+
+    });
 
 }
 
