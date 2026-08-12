@@ -259,3 +259,35 @@ GIFT_FINDER_PERSONA_NAME = 'Regi'
 # Tope de mensajes del usuario por conversación, para controlar costo
 # y evitar loops largos. Al llegar al tope, se invita a seguir por WhatsApp.
 GIFT_FINDER_MAX_USER_TURNS = 10
+
+
+# ==========================================================
+# LOGGING
+# ==========================================================
+#
+# Por defecto, Django solo imprime los errores 500 a consola cuando
+# DEBUG=True — en producción (DEBUG=False) los traga en silencio salvo
+# que se los mande a un email de admin (que no configuramos). Esto hace
+# que SIEMPRE se impriman a stdout, así aparecen en los "Logs" de Render
+# sin importar DEBUG.
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
