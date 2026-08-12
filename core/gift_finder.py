@@ -316,6 +316,44 @@ def _box_card(box_id):
     }
 
 
+FALLBACK_INTRO = [
+    "Se me complicó pensarlo con calma, pero no te quiero dejar sin nada",
+    "Justo ahora ando lento para pensarlo bien, pero mientras tanto",
+    "Tuve un problemita técnico, pero no te quiero dejar esperando",
+]
+
+
+def _fallback_recommendation(user_message):
+    """
+    Si la IA falla (cuota, timeout, lo que sea), en vez de dejar a la
+    persona solo con una disculpa, igual le recomendamos una Box real
+    del catálogo — usando el mensaje del usuario como texto de
+    búsqueda simple. Así Regi siempre es útil, no solo un cartel de
+    "error". Devuelve None si de verdad no hay ninguna Box disponible.
+    """
+
+    results = _buscar_boxes(query=user_message) or _buscar_boxes()
+
+    if not results:
+        return None
+
+    card = _box_card(results[0]["id"])
+
+    if not card:
+        return None
+
+    intro = random.choice(FALLBACK_INTRO)
+
+    return {
+        "reply": (
+            f"{intro}: te recomiendo la {card['name']}, "
+            "una de nuestras Boxes más elegidas 🎁. Si buscás algo "
+            "más puntual, escribinos por WhatsApp y te ayudamos a mano."
+        ),
+        "recommended_box": card,
+    }
+
+
 def run_gift_finder_turn(history, user_message, already_recommended=False):
     """
     history: lista de {"role": "user"|"assistant", "content": str} de
@@ -364,12 +402,18 @@ def run_gift_finder_turn(history, user_message, already_recommended=False):
 
         except groq.RateLimitError:
             _log_error(f"run_gift_finder_turn (intento {attempt + 1})")
-            return {"reply": RATE_LIMIT_REPLY, "recommended_box": None}
+            return _fallback_recommendation(user_message) or {
+                "reply": RATE_LIMIT_REPLY,
+                "recommended_box": None,
+            }
 
         except Exception:
             _log_error(f"run_gift_finder_turn (intento {attempt + 1})")
 
-    return {"reply": GENERIC_ERROR_REPLY, "recommended_box": None}
+    return _fallback_recommendation(user_message) or {
+        "reply": GENERIC_ERROR_REPLY,
+        "recommended_box": None,
+    }
 
 
 def _run_conversation(client, messages):
