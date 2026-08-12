@@ -42,10 +42,13 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 # Dominios permitidos, separados por coma (ej: "regalboxx.onrender.com,midominio.com").
 # En local no hace falta configurarlo.
 ALLOWED_HOSTS = [
-    h.strip()
-    for h in os.environ.get('ALLOWED_HOSTS', '').split(',')
-    if h.strip()
+    "regalbox-wg75.onrender.com",
+    "regalboxx.com.ar",
+    "www.regalboxx.com.ar",
+    "localhost",
+    "127.0.0.1",
 ]
+
 
 # Necesario en Django 4+ para aceptar POSTs (login admin, formularios) detrás
 # de HTTPS en el hosting. Mismo formato que ALLOWED_HOSTS pero con esquema.
