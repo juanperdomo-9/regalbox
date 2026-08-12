@@ -116,15 +116,18 @@ class CategoryAdmin(admin.ModelAdmin):
         "slug",
         "order",
         "active",
+        "coming_soon",
     )
 
     list_editable = (
         "order",
         "active",
+        "coming_soon",
     )
 
     list_filter = (
         "active",
+        "coming_soon",
     )
 
     search_fields = (

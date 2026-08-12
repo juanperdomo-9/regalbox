@@ -29,7 +29,7 @@ class CategorySitemap(Sitemap):
     priority = 0.7
 
     def items(self):
-        return Category.objects.filter(active=True)
+        return Category.objects.filter(active=True, coming_soon=False)
 
     def location(self, obj):
         return reverse("category_detail", args=[obj.slug])
