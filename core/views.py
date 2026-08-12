@@ -3,7 +3,7 @@ from urllib.parse import quote
 from django.conf import settings
 from django.db import transaction
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from .cart import Cart
 from .gift_finder import run_gift_finder_turn
 from .models import Category, GiftBox, Order, OrderItem
@@ -597,3 +597,23 @@ def gift_finder_reset(request):
     request.session.modified = True
 
     return JsonResponse({"success": True})
+
+
+# ==========================================================
+# SEO
+# ==========================================================
+
+def robots_txt(request):
+
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Disallow: /admin/",
+        "Disallow: /cart/",
+        "Disallow: /checkout/",
+        "Disallow: /gift-finder/",
+        "",
+        f"Sitemap: {request.scheme}://{request.get_host()}/sitemap.xml",
+    ]
+
+    return HttpResponse("\n".join(lines), content_type="text/plain")

@@ -1,4 +1,4 @@
-{% load static %}
+{% load static l10n %}
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 
@@ -24,6 +24,29 @@
     <meta property="og:description" content="{% if giftbox.meta_description %}{{ giftbox.meta_description }}{% else %}{{ giftbox.short_description }}{% endif %}">
     <meta property="og:image" content="{{ giftbox.image.url }}">
     <meta property="og:type" content="product">
+    <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{% url 'giftbox_detail' giftbox.slug %}">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": "{{ giftbox.name|escapejs }}",
+        "image": "{{ giftbox.image.url|escapejs }}",
+        "description": "{{ giftbox.short_description|escapejs }}",
+        {% if giftbox.sku %}"sku": "{{ giftbox.sku|escapejs }}",{% endif %}
+        "brand": {
+            "@type": "Brand",
+            "name": "REGALBOXX"
+        },
+        "offers": {
+            "@type": "Offer",
+            "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'giftbox_detail' giftbox.slug %}",
+            "priceCurrency": "ARS",
+            "price": "{{ giftbox.price|unlocalize }}",
+            "availability": "{% if giftbox.has_stock %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+        }
+    }
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -1788,13 +1811,7 @@
 
                 <p>
 
-                    contacto@regalbox.com.ar
-
-                </p>
-
-                <p>
-
-                    +54 221 XXX XXXX
+                    +54 221 681 6529
 
                 </p>
 

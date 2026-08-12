@@ -108,13 +108,6 @@ class GiftItem(models.Model):
         max_length=150
     )
 
-    image = models.ImageField(
-        upload_to="gift-items/",
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
     description = models.TextField(
         blank=True
     )
