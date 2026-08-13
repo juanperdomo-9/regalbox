@@ -395,10 +395,10 @@ class GiftBoxAdmin(admin.ModelAdmin):
     def stock_display(self, obj):
 
         if obj.unlimited_stock:
-            return format_html('<span style="color:#127A3E;font-weight:600;">Ilimitado</span>')
+            return format_html('<span style="color:#127A3E;font-weight:600;">{}</span>', "Ilimitado")
 
         if obj.stock <= 0:
-            return format_html('<span style="color:#9B1C1C;font-weight:600;">Sin stock</span>')
+            return format_html('<span style="color:#9B1C1C;font-weight:600;">{}</span>', "Sin stock")
 
         if obj.stock <= 5:
             return format_html('<span style="color:#C60018;font-weight:600;">{} u.</span>', obj.stock)
