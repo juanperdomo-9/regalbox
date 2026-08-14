@@ -20,7 +20,57 @@
         name="description"
         content="Finalizá tu pedido de REGALBOXX y coordiná la entrega por WhatsApp.">
 
-    <link rel="stylesheet" href="{% static_v 'css/output.css' %}">
+        <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+
+        tailwind.config = {
+
+            theme: {
+
+                container: {
+
+                    center: true,
+
+                    padding: {
+
+                        DEFAULT: "1.5rem",
+
+                        sm: "2rem",
+
+                        lg: "2rem",
+
+                        xl: "2.5rem",
+
+                        "2xl": "3rem"
+
+                    }
+
+                },
+
+                extend: {
+
+                    fontFamily: {
+
+                        sans: [
+                            "Inter",
+                            "sans-serif"
+                        ],
+
+                        display: [
+                            "Cormorant Garamond",
+                            "serif"
+                        ]
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    </script>
 
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
