@@ -1,4 +1,4 @@
-{% load static l10n %}
+{% load cache_bust static l10n %}
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 
@@ -48,7 +48,7 @@
     }
     </script>
 
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static_v 'css/output.css' %}">
 
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
@@ -67,7 +67,7 @@
             scroll-behavior:smooth;
 
         }
-        <script src="{% static 'js/home.js' %}"></script>
+        <script src="{% static_v 'js/home.js' %}"></script>
         body{
 
             font-family:Inter,sans-serif;
@@ -2093,11 +2093,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
-<script src="{% static 'js/home.js' %}"></script>
-<script src="{% static 'js/navbar2.js' %}"></script>
-<script src="{% static 'js/cart2.js' %}"></script>
-<script src="{% static 'js/animations.js' %}"></script>
-<script src="{% static 'js/gift-finder.js' %}"></script>
+<script src="{% static_v 'js/home.js' %}"></script>
+<script src="{% static_v 'js/navbar2.js' %}"></script>
+<script src="{% static_v 'js/cart2.js' %}"></script>
+<script src="{% static_v 'js/animations.js' %}"></script>
+<script src="{% static_v 'js/gift-finder.js' %}"></script>
 
 </body>
 </html>

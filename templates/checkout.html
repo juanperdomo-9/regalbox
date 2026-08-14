@@ -1,4 +1,4 @@
-{% load static %}
+{% load cache_bust static %}
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 
@@ -20,7 +20,7 @@
         name="description"
         content="Finalizá tu pedido de REGALBOXX y coordiná la entrega por WhatsApp.">
 
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static_v 'css/output.css' %}">
 
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
@@ -734,10 +734,10 @@
 
 </aside>
 
-<script src="{% static 'js/home.js' %}"></script>
-<script src="{% static 'js/navbar2.js' %}"></script>
-<script src="{% static 'js/cart2.js' %}"></script>
-<script src="{% static 'js/animations.js' %}"></script>
+<script src="{% static_v 'js/home.js' %}"></script>
+<script src="{% static_v 'js/navbar2.js' %}"></script>
+<script src="{% static_v 'js/cart2.js' %}"></script>
+<script src="{% static_v 'js/animations.js' %}"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {

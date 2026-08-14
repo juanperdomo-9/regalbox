@@ -1,4 +1,4 @@
-{% load static %}
+{% load cache_bust static %}
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 
@@ -24,7 +24,7 @@
     <meta property="og:description" content="{% if category.description %}{{ category.description }}{% else %}Descubrí nuestra colección {{ category.name }}: Boxes premium armadas a mano, listas para regalar.{% endif %}">
     <meta property="og:type" content="website">
 
-    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static_v 'css/output.css' %}">
 
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
@@ -1339,12 +1339,12 @@
 
 </aside>
 
-<script src="{% static 'js/home.js' %}"></script>
-<script src="{% static 'js/navbar2.js' %}"></script>
-<script src="{% static 'js/cart2.js' %}"></script>
-<script src="{% static 'js/animations.js' %}"></script>
-<script src="{% static 'js/gift-finder.js' %}"></script>
-<script src="{% static 'js/category.js' %}"></script>
+<script src="{% static_v 'js/home.js' %}"></script>
+<script src="{% static_v 'js/navbar2.js' %}"></script>
+<script src="{% static_v 'js/cart2.js' %}"></script>
+<script src="{% static_v 'js/animations.js' %}"></script>
+<script src="{% static_v 'js/gift-finder.js' %}"></script>
+<script src="{% static_v 'js/category.js' %}"></script>
 
 </body>
 </html>
